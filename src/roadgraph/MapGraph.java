@@ -47,8 +47,8 @@ public class MapGraph {
 	 */
 	public int getNumVertices()
 	{
-		//TODO: Implement this method in WEEK 3
-		return 0;
+		//DONE: Implement this method in WEEK 3
+		return numberOfVerticles;
 	}
 	
 	/**
@@ -67,8 +67,8 @@ public class MapGraph {
 	 */
 	public int getNumEdges()
 	{
-		//TODO: Implement this method in WEEK 3
-		return 0;
+		//DONE: Implement this method in WEEK 3
+		return numberOfEdges;
 	}
 
 	
