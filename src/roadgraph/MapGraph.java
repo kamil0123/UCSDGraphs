@@ -9,6 +9,7 @@ package roadgraph;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,8 +58,10 @@ public class MapGraph {
 	 */
 	public Set<GeographicPoint> getVertices()
 	{
-		//TODO: Implement this method in WEEK 3
-		return null;
+		//DONE: Implement this method in WEEK 3
+		Set<GeographicPoint> set = new HashSet<GeographicPoint>();
+		set.addAll(nodes.keySet());
+		return set;
 	}
 	
 	/**
