@@ -8,7 +8,9 @@
 package roadgraph;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -23,15 +25,20 @@ import util.GraphLoader;
  *
  */
 public class MapGraph {
-	//TODO: Add your member variables here in WEEK 3
-	
+	//DONE: Add your member variables here in WEEK 3
+	private Map<GeographicPoint, List<MapNode>> nodes;
+	private int numberOfVerticles;
+	private int numberOfEdges;
 	
 	/** 
 	 * Create a new empty MapGraph 
 	 */
 	public MapGraph()
 	{
-		// TODO: Implement in this constructor in WEEK 3
+		// DONE: Implement in this constructor in WEEK 3
+		this.nodes = new HashMap<GeographicPoint, List<MapNode>>();
+		numberOfVerticles = 0;
+		numberOfEdges = 0;
 	}
 	
 	/**
