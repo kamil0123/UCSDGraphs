@@ -29,7 +29,7 @@ import util.GraphLoader;
 public class MapGraph {
 	//DONE: Add your member variables here in WEEK 3
 	private Map<GeographicPoint, List<MapNode>> nodes;
-	private int numberOfVerticles;
+	private int numberOfVertices;
 	private int numberOfEdges;
 	
 	/** 
@@ -39,7 +39,7 @@ public class MapGraph {
 	{
 		// DONE: Implement in this constructor in WEEK 3
 		this.nodes = new HashMap<GeographicPoint, List<MapNode>>();
-		numberOfVerticles = 0;
+		numberOfVertices = 0;
 		numberOfEdges = 0;
 	}
 	
@@ -50,7 +50,7 @@ public class MapGraph {
 	public int getNumVertices()
 	{
 		//DONE: Implement this method in WEEK 3
-		return numberOfVerticles;
+		return numberOfVertices;
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class MapGraph {
 		}
 		
 		nodes.put(location, new ArrayList<MapNode>());
-		numberOfVerticles++;
+		numberOfVertices++;
 
 		return true;
 	}
