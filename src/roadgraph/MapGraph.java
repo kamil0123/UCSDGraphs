@@ -86,7 +86,7 @@ public class MapGraph {
 	 */
 	public boolean addVertex(GeographicPoint location)
 	{
-		// TODO: Implement this method in WEEK 3
+		// DONE: Implement this method in WEEK 3
 		if (location == null || nodes.containsKey(location)) {
 			return false;
 		}
