@@ -112,10 +112,30 @@ public class MapGraph {
 	public void addEdge(GeographicPoint from, GeographicPoint to, String roadName,
 			String roadType, double length) throws IllegalArgumentException {
 
-		//TODO: Implement this method in WEEK 3
+		//DONE: Implement this method in WEEK 3
+		if (!geographicPointVeryfied(from) || !geographicPointVeryfied(to) || !roadParamsVeryfied(roadName, roadType, length))
+			throw new IllegalArgumentException();
 		
+		Road road = new Road(roadName, roadType, length);
+		MapNode node = new MapNode(to, road);
+		
+		nodes.get(from).add(node);
+		numberOfEdges++;
+	}
+
+	private boolean geographicPointVeryfied(GeographicPoint point) {
+		if (point == null || !nodes.containsKey(point))
+			return false;
+		else 
+			return true;
 	}
 	
+	private boolean roadParamsVeryfied(String roadName, String roadType, double length) {
+		if (roadName == null || roadType == null || length < 0)
+			return false;
+		else 
+			return true;
+	}
 
 	/** Find the path from start to goal using breadth first search
 	 * 
