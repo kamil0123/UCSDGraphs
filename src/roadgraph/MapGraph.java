@@ -8,6 +8,7 @@
 package roadgraph;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -86,7 +87,14 @@ public class MapGraph {
 	public boolean addVertex(GeographicPoint location)
 	{
 		// TODO: Implement this method in WEEK 3
-		return false;
+		if (location == null || nodes.containsKey(location)) {
+			return false;
+		}
+		
+		nodes.put(location, new ArrayList<MapNode>());
+		numberOfVerticles++;
+
+		return true;
 	}
 	
 	/**
