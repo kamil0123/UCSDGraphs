@@ -11,8 +11,10 @@ package roadgraph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -161,14 +163,48 @@ public class MapGraph {
 	public List<GeographicPoint> bfs(GeographicPoint start, 
 			 					     GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
-		// TODO: Implement this method in WEEK 3
+		// DONE: Implement this method in WEEK 3
 		
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
-
+		Queue<GeographicPoint> pointsToSearch = new LinkedList<GeographicPoint>();
+		Set<GeographicPoint> checked = new HashSet<GeographicPoint>();
+		Map<GeographicPoint, GeographicPoint> parentsMap = new HashMap<GeographicPoint, GeographicPoint>();
+		
+		pointsToSearch.add(start);
+		
+		while (!pointsToSearch.isEmpty()) {
+			GeographicPoint current = pointsToSearch.poll();
+			
+			// Hook for visualization.  See writeup.
+			nodeSearched.accept(current);
+			
+			if (current.equals(goal)) {
+				return getPath(start, goal, parentsMap);
+			}
+			
+			for (MapNode node : nodes.get(current)) {
+				if (checked.contains(node.vertex)) {
+					continue;
+				}
+				checked.add(node.vertex);
+				pointsToSearch.add(node.vertex);
+				parentsMap.put(node.vertex, current);
+			}
+		}
 		return null;
 	}
-	
+
+	private List<GeographicPoint> getPath(GeographicPoint start, GeographicPoint point,
+			Map<GeographicPoint, GeographicPoint> parentsMap) {
+		List<GeographicPoint> path = new LinkedList<GeographicPoint>();
+		
+		while (!point.equals(start)) {
+			path.add(0, point);
+			point = parentsMap.get(point);
+		}
+		path.add(0, start);
+
+		return path;
+	}
 
 	/** Find the path from start to goal using Dijkstra's algorithm
 	 * 
