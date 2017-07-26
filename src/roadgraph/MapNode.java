@@ -5,12 +5,12 @@ import geography.GeographicPoint;
 public class MapNode {
 	
 	public final GeographicPoint vertex;
-	public final String streetName;
-	public final String streetType;
+	public final String roadName;
+	public final String roadType;
 	
-	public MapNode(GeographicPoint vertex, String name, String type) {
+	public MapNode(GeographicPoint vertex, String roadName, String roadType) {
 		this.vertex = vertex;
-		this.streetName = name;
-		this.streetType = type;
+		this.roadName = roadName;
+		this.roadType = roadType;
 	}
 }
