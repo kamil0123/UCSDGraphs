@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -235,6 +236,16 @@ public class MapGraph {
 										  GeographicPoint goal, Consumer<GeographicPoint> nodeSearched)
 	{
 		// TODO: Implement this method in WEEK 4
+		
+		if (!geographicPointVeryfied(start) || !geographicPointVeryfied(goal))
+			throw new IllegalArgumentException();
+
+		
+		PriorityQueue<GeographicPoint> pointsToSearch = new PriorityQueue<GeographicPoint>();
+		Set<GeographicPoint> checked = new HashSet<GeographicPoint>();
+		Map<GeographicPoint, GeographicPoint> parentsMap = new HashMap<GeographicPoint, GeographicPoint>();
+		
+		
 
 		// Hook for visualization.  See writeup.
 		//nodeSearched.accept(next.getLocation());
