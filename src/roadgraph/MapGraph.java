@@ -165,6 +165,9 @@ public class MapGraph {
 	{
 		// DONE: Implement this method in WEEK 3
 		
+		if (!geographicPointVeryfied(start) || !geographicPointVeryfied(goal))
+			throw new IllegalArgumentException();
+		
 		Queue<GeographicPoint> pointsToSearch = new LinkedList<GeographicPoint>();
 		Set<GeographicPoint> checked = new HashSet<GeographicPoint>();
 		Map<GeographicPoint, GeographicPoint> parentsMap = new HashMap<GeographicPoint, GeographicPoint>();
