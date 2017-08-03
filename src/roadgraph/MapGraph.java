@@ -262,9 +262,20 @@ public class MapGraph {
 		if (!geographicPointVeryfied(start) || !geographicPointVeryfied(goal))
 			throw new IllegalArgumentException();
 
-		PriorityQueue<GeographicPoint> pointsToSearch = new PriorityQueue<GeographicPoint>();
-		Set<GeographicPoint> checked = new HashSet<GeographicPoint>();
-		Map<GeographicPoint, GeographicPoint> parentsMap = new HashMap<GeographicPoint, GeographicPoint>();
+		PriorityQueue<MapNode> pointsToSearch = new PriorityQueue<MapNode>();
+		Set<MapNode> checked = new HashSet<MapNode>();
+		Map<MapNode, MapNode> parentsMap = new HashMap<MapNode, MapNode>();
+		
+		for (MapNode node : nodes.values()) {
+			node.setDistance(Double.MAX_VALUE);
+		}
+		
+		MapNode startNode = nodes.get(start);
+		MapNode goalNode = nodes.get(goal);		
+		startNode.setDistance(0.0);
+		
+		pointsToSearch.add(startNode);
+		MapNode current = null;
 
 		// Hook for visualization. See writeup.
 		// nodeSearched.accept(next.getLocation());
