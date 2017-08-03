@@ -18,4 +18,13 @@ public class MapEdge {
 		this.end = end;
 		this.road = roadInfo;
 	}
+	
+	MapNode getNeigbour(MapNode node) {
+		if (node.equals(start))
+			return end;
+		else if (node.equals(end))
+			return start;
+		else
+			return null;
+	}
 }
