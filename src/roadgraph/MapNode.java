@@ -5,7 +5,7 @@ import java.util.Set;
 
 import geography.GeographicPoint;
 
-public class MapNode {
+public class MapNode implements Comparable<MapNode> {
 
 	// location - position on map of this node;
 	// edges - list of edges of this node;
@@ -24,6 +24,14 @@ public class MapNode {
 
 	void addEdge(MapEdge edge) {
 		edges.add(edge);
+	}
+	
+	@Override
+	public int compareTo(MapNode newMapNode) {
+		Double thisNodesDistance = this.getPredictedDistance() + this.getDistance();
+		Double byNewMapNodeDistance = newMapNode.getPredictedDistance() + newMapNode.getDistance();
+		// TODO Auto-generated method stub
+		return thisNodesDistance.compareTo(byNewMapNodeDistance);
 	}
 
 	Set<MapNode> getNeigbours() {
@@ -57,5 +65,4 @@ public class MapNode {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
-
 }
