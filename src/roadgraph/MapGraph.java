@@ -265,7 +265,7 @@ public class MapGraph {
 	 */
 	public List<GeographicPoint> dijkstra(GeographicPoint start, GeographicPoint goal,
 			Consumer<GeographicPoint> nodeSearched) {
-		// TODO: Implement this method in WEEK 4
+		// DONE: Implement this method in WEEK 4
 
 		if (!geographicPointVeryfied(start) || !geographicPointVeryfied(goal))
 			throw new IllegalArgumentException();
@@ -368,6 +368,18 @@ public class MapGraph {
 		System.out.print("DONE. \nLoading the map...");
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", firstMap);
 		System.out.println("DONE.");
+		
+		MapGraph simpleTestMap = new MapGraph();
+		GraphLoader.loadRoadMap("data/testdata/simpletest.map", simpleTestMap);
+		
+		GeographicPoint testStart = new GeographicPoint(1.0, 1.0);
+		GeographicPoint testEnd = new GeographicPoint(8.0, -1.0);
+		
+		System.out.println("Test 1 using simpletest: Dijkstra should be 9 and AStar should be 5"); 
+		List<GeographicPoint> testRoute = simpleTestMap.dijkstra(testStart,testEnd);
+		System.out.println("Dijkstra: " + testRoute.size());
+		
+		
 
 		// You can use this method for testing.
 
