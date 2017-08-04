@@ -356,9 +356,61 @@ public class MapGraph {
 			Consumer<GeographicPoint> nodeSearched) {
 		// TODO: Implement this method in WEEK 4
 
-		// Hook for visualization. See writeup.
-		// nodeSearched.accept(next.getLocation());
+		if (!geographicPointVeryfied(start) || !geographicPointVeryfied(goal))
+			throw new IllegalArgumentException();
 
+		PriorityQueue<MapNode> pointsToSearch = new PriorityQueue<MapNode>();
+		Set<MapNode> checked = new HashSet<MapNode>();
+		Map<MapNode, MapNode> parentsMap = new HashMap<MapNode, MapNode>();
+
+		for (MapNode node : nodes.values()) {
+			node.setDistance(Double.MAX_VALUE);
+		}
+
+		MapNode startNode = nodes.get(start);
+		MapNode goalNode = nodes.get(goal);
+		startNode.setDistance(0.0);
+
+		pointsToSearch.add(startNode);
+		MapNode current = null;
+
+		while (!pointsToSearch.isEmpty()) {
+			current = pointsToSearch.poll();
+
+			if (checked.contains(current))
+				continue;
+			else {
+
+				checked.add(current);
+
+				// Hook for visualization. See writeup.
+				nodeSearched.accept(current.getLocation());
+
+				if (goalIsFound(current, goalNode)) {
+					return getPath(startNode, goalNode, parentsMap);
+				}
+				
+				HashMap<MapNode, Double> curDistances = new HashMap<MapNode, Double>();
+				for (MapEdge edge : current.getEdges()) {
+					curDistances.put(edge.getNeigbour(current), edge.getRoad().getLength());
+				}
+
+				for (MapNode node : current.getNeigbours()) {
+					if (checked.contains(node)) {
+						continue;
+					}
+					Double predictedDistance = node.getDistanceToOtherNode(goalNode);
+					Double nodesDistance = current.getDistance() + curDistances.get(node); 
+					// TODO
+					// finish distance calculations
+					if (nodesDistance + predictedDistance < node.getDistance()) {
+						node.setDistance(nodesDistance);
+						parentsMap.put(node, current);
+						pointsToSearch.add(node);
+					}
+				}
+			}
+		}
 		return null;
 	}
 

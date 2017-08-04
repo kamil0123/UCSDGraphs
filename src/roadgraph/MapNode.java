@@ -65,4 +65,9 @@ public class MapNode implements Comparable<MapNode> {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+	
+	public Double getDistanceToOtherNode(MapNode other) {
+		GeographicPoint otherLocation = other.getLocation();
+		return location.distance(otherLocation);
+	}
 }
