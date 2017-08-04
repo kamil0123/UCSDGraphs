@@ -128,6 +128,7 @@ public class MapGraph {
 
 		MapEdge edge = new MapEdge(nodeFrom, nodeTo, road);
 		edges.add(edge);
+		nodeFrom.addEdge(edge);
 	}
 
 	private boolean geographicPointVeryfied(GeographicPoint point) {
@@ -197,7 +198,7 @@ public class MapGraph {
 			// Hook for visualization. See writeup.
 			nodeSearched.accept(current.getLocation());
 
-			if (current.equals(goalNode)) {
+			if (goalIfFound(current, goalNode)) {
 				return getPath(startNode, goalNode, parentsMap);
 			}
 
@@ -211,6 +212,13 @@ public class MapGraph {
 			}
 		}
 		return null;
+	}
+
+	private boolean goalIfFound(MapNode current, MapNode goalNode) {
+		if (current.getLocation().x == goalNode.getLocation().x && current.getLocation().y == goalNode.getLocation().y)
+			return true;
+		else
+			return false;
 	}
 
 	private List<GeographicPoint> getPath(MapNode startNode, MapNode endNode, Map<MapNode, MapNode> parentsMap) {
