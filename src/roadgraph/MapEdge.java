@@ -27,4 +27,8 @@ public class MapEdge {
 		else
 			return null;
 	}
+	
+	Road getRoad() {
+		return road;
+	}
 }

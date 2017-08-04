@@ -198,7 +198,7 @@ public class MapGraph {
 			// Hook for visualization. See writeup.
 			nodeSearched.accept(current.getLocation());
 
-			if (goalIfFound(current, goalNode)) {
+			if (goalIsFound(current, goalNode)) {
 				return getPath(startNode, goalNode, parentsMap);
 			}
 
@@ -214,7 +214,7 @@ public class MapGraph {
 		return null;
 	}
 
-	private boolean goalIfFound(MapNode current, MapNode goalNode) {
+	private boolean goalIsFound(MapNode current, MapNode goalNode) {
 		if (current.getLocation().x == goalNode.getLocation().x && current.getLocation().y == goalNode.getLocation().y)
 			return true;
 		else
@@ -273,21 +273,52 @@ public class MapGraph {
 		PriorityQueue<MapNode> pointsToSearch = new PriorityQueue<MapNode>();
 		Set<MapNode> checked = new HashSet<MapNode>();
 		Map<MapNode, MapNode> parentsMap = new HashMap<MapNode, MapNode>();
-		
+
 		for (MapNode node : nodes.values()) {
 			node.setDistance(Double.MAX_VALUE);
 		}
-		
+
 		MapNode startNode = nodes.get(start);
-		MapNode goalNode = nodes.get(goal);		
+		MapNode goalNode = nodes.get(goal);
 		startNode.setDistance(0.0);
-		
+
 		pointsToSearch.add(startNode);
 		MapNode current = null;
 
-		// Hook for visualization. See writeup.
-		// nodeSearched.accept(next.getLocation());
+		while (!pointsToSearch.isEmpty()) {
+			current = pointsToSearch.poll();
 
+			if (checked.contains(current))
+				continue;
+			else {
+
+				checked.add(current);
+
+				// Hook for visualization. See writeup.
+				nodeSearched.accept(current.getLocation());
+
+				if (goalIsFound(current, goalNode)) {
+					return getPath(startNode, goalNode, parentsMap);
+				}
+				
+				HashMap<MapNode, Double> curDistances = new HashMap<MapNode, Double>();
+				for (MapEdge edge : current.getEdges()) {
+					curDistances.put(edge.getNeigbour(current), edge.getRoad().getLength());
+				}
+
+				for (MapNode node : current.getNeigbours()) {
+					if (checked.contains(node)) {
+						continue;
+					}
+					Double nodesDistance = current.getDistance() + curDistances.get(node); 
+					if (nodesDistance < node.getDistance()) {
+						node.setDistance(nodesDistance);
+						parentsMap.put(node, current);
+						pointsToSearch.add(node);
+					}
+				}
+			}
+		}
 		return null;
 	}
 
